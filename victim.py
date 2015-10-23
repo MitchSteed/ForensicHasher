@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import argparse
 import socket
 import sys
 
@@ -15,11 +16,11 @@ def parse_arguments():
     ''' parse arguments, which include '-p' for port and '-h' for host'''
     parser = argparse.ArgumentParser(prog='Forensic Hasher', description='A simple tool to date, and hash linux command outputs', add_help=True)
     parser.add_argument('-p', '--port', type=int, action='store', help='port the victim will bind to', default=3000)
-    parser.add_argument('-h', '--host', type=str, action='store', help='host the victim will connect to', default='localhost')
+    parser.add_argument('-d', '--destination', type=str, action='store', help='destination host the victim will connect to', default='localhost')
     parser.add_argument('-n', '--name', type=str, action='store', help='filename to put the output in', default='ForensicHasher.txt')
     args = parser.parse_args()
 
-    return args.host, args.port, args.name
+    return args.destination, args.port, args.name
 
 
 def send(host, port, name, data):

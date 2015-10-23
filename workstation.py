@@ -1,17 +1,13 @@
 #!/usr/bin/env python
 
+import argparse
 import datetime
+import hashlib
 import socket
-import sys
 
 buff_size = 1024
 hash_algorithm = "md5"
 data_delim = "%%%%"
-
-
-def getData():
-    return sys.stdin.read()
-
 
 
 def parse_arguments():
@@ -22,7 +18,7 @@ def parse_arguments():
         help='hashing algorith to use, options include: {}'.format(hashlib.algorithms), default='md5')
     args = parser.parse_args()
 
-    return args.port, args.algoithm.lower()
+    return args.port, args.algorithm.lower()
 
 def getContentsAndFileName(data):
     split_list = data.split(data_delim)
@@ -31,12 +27,13 @@ def getContentsAndFileName(data):
     return file_name, file_contents
 
 def getDate():
-    datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 def getHash(hashable):
     method = getattr(hashlib, hash_algorithm)
-    method.update(hashable)
-    return method.hexdigest()
+    h = method()
+    h.update(hashable)
+    return h.hexdigest()
 
 
 def writeFile(file_name, file_contents):
@@ -85,8 +82,7 @@ def listen(port):
 
 def run():
     port, hash_algorithm = parse_arguments()
-    data = getData()
-    send(host, port, name, data)
+    listen(port)
 
 
 
