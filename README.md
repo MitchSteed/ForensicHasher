@@ -15,9 +15,9 @@ python workstation -p 3000 -a md5
 The victim connects to a remote host over the network and passes whatever it receives from standard input to the workstation. The victim has arguments to pass host, port, and filename. Port defaults to 3000, host defaults to localhost, and filename defaults to ForensicHasher.txt although you certainly would want to generally pass this argument. 
 
 Example Usage:
-'''
+```
 cat /etc/passwd python victim.py -p 3000 -d 192.192.192.192 -n etc.passwd.txt
-'''
+```
 
 Which then will connect to the workstation which will create the following files:
 etc.passwd.txt
@@ -26,8 +26,8 @@ etc.passwd.txt.date
 
 ### Add Victim to the path
 To add the victim.py to your path to simplify usage simply change the permissions by
-'''
+```
 chmod +x victim.py
 cd /usr/bin
 ln -s ~/path/to/victim.py
-'''
+```
