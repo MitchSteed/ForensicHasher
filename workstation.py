@@ -14,7 +14,7 @@ def parse_arguments():
     ''' parse arguments, which include '-p' for port and '-h' for host'''
     parser = argparse.ArgumentParser(prog='Forensic Hasher', description='A simple tool to date, and hash linux command outputs', add_help=True)
     parser.add_argument('-p', '--port', type=int, action='store', help='port the victim will listen on', default=3000)
-    parser.add_argument('-a', '--algorithm', type=str, action='store', 
+    parser.add_argument('-a', '--algorithm', type=str, action='store',
         help='hashing algorith to use, options include: {}'.format(hashlib.algorithms), default='md5')
     args = parser.parse_args()
 
@@ -47,7 +47,7 @@ def writeFiles(data):
     file_hash = getHash(file_contents)
     writeFile(file_name, file_contents)
     writeFile(file_name +"." + hash_algorithm, file_hash)
-    
+
     # date and date hash
     date = getDate()
     date_hash = getHash(date)
@@ -69,6 +69,7 @@ def handle(client):
     writeFiles(data)
 
 def listen(port):
+    print "Now listening for input: "
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR,1)
     sock.bind(("", port))
@@ -79,6 +80,14 @@ def listen(port):
 
     sock.close()
 
+def get_ip_address(ifname):
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    return socket.inet_ntoa(fcntl.ioctl(
+        s.fileno(),
+        0x8915,  # SIOCGIFADDR
+        struct.pack('256s', ifname[:15])
+    )[20:24])
+
 
 def run():
     port, hash_algorithm = parse_arguments()
@@ -88,4 +97,3 @@ def run():
 
 if __name__ == "__main__":
     run()
-    
