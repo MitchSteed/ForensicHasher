@@ -5,7 +5,7 @@ The Forensic Hasher is basically an enhanced netcat (although it doesn't use net
 ## Workstation
 The workstation listens for any and all incoming requests and upon receipt of those requests writes the data to a file, creates a hash of that file and a timestamp writing to the local directory.
 
-The workstation can receive a parameter for which port to bind to (defaults to 3000) and a hashing algorithm to use (to view available algorithms on your system run ./workstation -h). The workstation will continue listening until shut down.
+The workstation can receive a parameter for which port to bind to (defaults to 3000) and a hashing algorithm to use (to view available algorithms on your system run ./workstation -a). The workstation will continue listening until shut down.
 
 Example Usage:
 ```
