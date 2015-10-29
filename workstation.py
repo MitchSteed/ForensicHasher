@@ -21,7 +21,7 @@ hash_algorithm = "md5"
 data_delim = "%%%%"
 
 def parse_arguments():
-    ''' parse arguments, which include '-p' for port and '-d' for host'''
+    ''' parse arguments, which include '-p' for port and '-a' for algorithms'''
     parser = argparse.ArgumentParser(prog='Forensic Hasher', description='A simple tool to date, and hash linux command outputs', add_help=True)
     parser.add_argument('-p', '--port', type=int, action='store', help='port the victim will listen on', default=3000)
     parser.add_argument('-a', '--algorithm', type=str, action='store',
