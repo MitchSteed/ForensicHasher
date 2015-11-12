@@ -12,7 +12,7 @@ import argparse
 import datetime
 'Imports the hashlib library, used for creation of hashes based on the content imported from the socket'
 import hashlib
-'Imports the socket library, used to establish a tunnel between the bictim and host machines'
+'Imports the socket library, used to establish a tunnel between the victim and host machines'
 import socket
 
 'Set program constants'
